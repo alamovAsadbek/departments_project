@@ -23,4 +23,5 @@ class Company:
 
     @log_decorator
     def delete_department(self):
-        pass
+        self.__department.delete_department()
+        return True
