@@ -122,13 +122,13 @@ def auth_menu():
 
 
 @log_decorator
-def admin_menu():
+def company_menu():
     """
     Displays the admin menu where admins can manage departments, employees, view statistics, or logout.
     """
     text = '''
 1. Manage departments
-2. Manage employees | CRUD
+2. Manage employees
 3. Show statistics
 4. Logout
     '''
@@ -139,10 +139,10 @@ def admin_menu():
 
         if user_input == 1:
             # Add department management logic here
-            pass
+            department_menu_for_company()
         elif user_input == 2:
             # Add employee management logic here
-            pass
+            employee_menu_for_company()
         elif user_input == 3:
             # Add statistics viewing logic here
             pass
@@ -160,7 +160,7 @@ def admin_menu():
 
 
 @log_decorator
-def employee_menu():
+def employee_menu_for_company():
     """
     Displays the employee management menu where users can create, update, delete employees,
     show employees, or log out.
@@ -197,17 +197,17 @@ def employee_menu():
             # Handle invalid menu input
             print("Wrong input")
             # Show the employee menu again
-            employee_menu()
+            employee_menu_for_company()
 
     except Exception as e:
         # Handle exceptions and show error message
         print(f'Error: {e}')
         # Show the employee menu again
-        employee_menu()
+        employee_menu_for_company()
 
 
 @log_decorator
-def department_menu():
+def department_menu_for_company():
     """
     Displays the department management menu where users can create, update, delete departments,
     view statistics, or log out.
@@ -244,13 +244,13 @@ def department_menu():
             # Handle invalid menu input
             print("Wrong input")
             # Show the department menu again
-            department_menu()
+            department_menu_for_company()
 
     except Exception as e:
         # Handle exceptions and show error message
         print(f'Error: {e}')
         # Show the department menu again
-        department_menu()
+        department_menu_for_company()
 
 
 if __name__ == '__main__':
