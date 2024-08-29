@@ -1,4 +1,5 @@
 from main_files.decorator.decorator_func import log_decorator
+from pages.auth.auth import Auth
 
 
 @log_decorator
@@ -20,3 +21,9 @@ def auth_menu():
     except Exception as e:
         print(f'Error: {e}')
         auth_menu()
+
+
+if __name__ == '__main__':
+    auth = Auth()
+    auth.logout()
+    auth_menu()

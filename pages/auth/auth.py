@@ -42,15 +42,24 @@ class Auth:
     @log_decorator
     def create_company_table(self):
         query = '''
+        CREATE TABLE IF NOT EXISTS companies (
         ID BIGSERIAL PRIMARY KEY,
         NAME VARCHAR(60) NOT NULL,
         USERNAME VARCHAR(60) NOT NULL UNIQUE,
         PASSWORD  VARCHAR(256) NOT NULL,
         IS_LOGIN BOOLEAN DEFAULT FALSE,
+        )
         '''
         threading.Thread(target=execute_query, args=(query,)).start()
         return True
 
     @log_decorator
     def logout(self):
-        pass
+        self.create_company_table()
+        self.create_employee_table()
+        self.create_department_table()
+        query = 'UPDATE %s SET IS_LOGIN=FALSE;'
+        threading.Thread(target=execute_query, args=(query, 'employees',)).start()
+        threading.Thread(target=execute_query, args=(query, 'departments',)).start()
+        threading.Thread(target=execute_query, args=(query, 'companies',)).start()
+        return True
