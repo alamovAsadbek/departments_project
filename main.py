@@ -14,7 +14,9 @@ def auth_menu():
         if user_input == 1:
             pass
         elif user_input == 2:
-            pass
+            auth.logout()
+            print("Logged out")
+            return
         else:
             print("Wrong input")
             auth_menu()
