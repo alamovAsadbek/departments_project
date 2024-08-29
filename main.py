@@ -3,6 +3,7 @@ import threading
 from main_files.decorator.decorator_func import log_decorator
 from pages.auth.auth import Auth
 from roles.admin.admin import Admin
+from roles.company.company import Company
 
 
 @log_decorator
@@ -99,9 +100,11 @@ def department_menu_for_company():
     '''
     print(text)
     try:
+        company = Company()
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
-            pass
+            company.create_department()
+            department_menu_for_company()
         elif user_input == 2:
             pass
         elif user_input == 3:
