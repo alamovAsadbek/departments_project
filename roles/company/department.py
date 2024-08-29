@@ -21,5 +21,13 @@ class Department:
         return True
 
     @log_decorator
+    def get_department(self):
+        query = '''
+                SELECT * FROM departments WHERE COMPANY_ID=%s
+                '''
+        params = (self.__active_company['id'],)
+        execute_query(query, params, fetch='all')
+
+    @log_decorator
     def show_department(self):
         pass
