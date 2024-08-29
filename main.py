@@ -161,7 +161,49 @@ def admin_menu():
 
 @log_decorator
 def employee_menu():
-    pass
+    """
+    Displays the employee management menu where users can create, update, delete employees,
+    show employees, or log out.
+    """
+    text = '''
+1. Create employee
+2. Update employee
+3. Delete employee
+4. Show employees
+5. Logout
+    '''
+    print(text)
+    try:
+        # Get user input for menu choice
+        user_input: int = int(input("Choose menu: "))
+
+        if user_input == 1:
+            # Logic to create a new employee should be added here
+            pass
+        elif user_input == 2:
+            # Logic to update an existing employee should be added here
+            pass
+        elif user_input == 3:
+            # Logic to delete an employee should be added here
+            pass
+        elif user_input == 4:
+            # Logic to display a list of employees should be added here
+            pass
+        elif user_input == 5:
+            # Go back to the admin menu
+            admin_menu()
+
+        else:
+            # Handle invalid menu input
+            print("Wrong input")
+            # Show the employee menu again
+            employee_menu()
+
+    except Exception as e:
+        # Handle exceptions and show error message
+        print(f'Error: {e}')
+        # Show the employee menu again
+        employee_menu()
 
 
 @log_decorator
@@ -174,7 +216,7 @@ def department_menu():
 1. Create a new department
 2. Update department
 3. Delete department
-4. Show statistics
+4. Show departments
 5. Logout
     '''
     print(text)
