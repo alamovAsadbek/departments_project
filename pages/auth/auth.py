@@ -19,7 +19,7 @@ class Auth:
         ID BIGSERIAL PRIMARY KEY,
         FIRST_NAME VARCHAR(60) NOT NULL,
         LAST_NAME VARCHAR(60) NOT NULL,
-        EMAIL VARCHAR(60) NOT NULL UNIQUE,
+        USERNAME VARCHAR(60) NOT NULL UNIQUE,
         PASSWORD VARCHAR(256) NOT NULL,
         COMPANY_ID BIGINT REFERENCES companies(ID) NOT NULL,
         DEPARTMENT BIGINT REFERENCES departments(ID) NOT NULL,
@@ -60,10 +60,20 @@ class Auth:
 
     @log_decorator
     def login(self):
+        tables = ['employees', 'companies']
         username = input('Username or email: ').strip().lower()
         password = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
         if username == 'admin' and password == hashlib.sha256(self.__admin_password.encode('utf-8')).hexdigest():
             return {'is_login': True, 'role': 'admin'}
+        for table in tables:
+            query = '''
+            SELECT * FROM %S WHERE USERNAME=%s AND PASSWORD=%S;
+            '''
+            params = (table, username, password)
+            result = execute_query(query, params, fetch='one')
+            if result is not None:
+                return {'is_login': True, 'role': table}
+        return {'is_login': False}
 
     @log_decorator
     def logout(self):
