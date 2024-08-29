@@ -41,7 +41,15 @@ class Auth:
 
     @log_decorator
     def create_company_table(self):
-        pass
+        query = '''
+        ID BIGSERIAL PRIMARY KEY,
+        NAME VARCHAR(60) NOT NULL,
+        USERNAME VARCHAR(60) NOT NULL UNIQUE,
+        PASSWORD  VARCHAR(256) NOT NULL,
+        IS_LOGIN BOOLEAN DEFAULT FALSE,
+        '''
+        threading.Thread(target=execute_query, args=(query,)).start()
+        return True
 
     @log_decorator
     def logout(self):
