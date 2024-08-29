@@ -28,5 +28,21 @@ class Auth:
         return True
 
     @log_decorator
+    def create_department_table(self):
+        query = '''
+        CREATE TABLE IF NOT EXISTS departments (
+        ID BIGSERIAL PRIMARY KEY,
+        NAME VARCHAR(60) NOT NULL,
+        COMPANY_ID BIGINT REFERENCES companies(ID) NOT NULL
+        )
+        '''
+        threading.Thread(target=execute_query, args=(query,)).start()
+        return True
+
+    @log_decorator
+    def create_company_table(self):
+        pass
+
+    @log_decorator
     def logout(self):
         pass
