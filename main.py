@@ -17,6 +17,7 @@ def auth_menu():
                 print('Login failed')
                 auth_menu()
             elif result_login['role'] == 'admin':
+                print("\n<- Welcome Admin ->\n")
                 pass
             elif result_login['role'] == 'employees':
                 pass
