@@ -1,5 +1,7 @@
 import threading
 
+from psycopg2 import sql
+
 from main_files.database.db_setting import execute_query
 from main_files.decorator.decorator_func import log_decorator
 
@@ -21,8 +23,8 @@ class Auth:
         COMPANY_ID BIGINT REFERENCES companies(ID) NOT NULL,
         DEPARTMENT BIGINT REFERENCES departments(ID) NOT NULL,
         CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        IS_LOGIN BOOLEAN DEFAULT FALSE,
-        )
+        IS_LOGIN BOOLEAN DEFAULT FALSE
+        );
         '''
         threading.Thread(target=execute_query, args=(query,)).start()
         return True
@@ -33,8 +35,9 @@ class Auth:
         CREATE TABLE IF NOT EXISTS departments (
         ID BIGSERIAL PRIMARY KEY,
         NAME VARCHAR(60) NOT NULL,
-        COMPANY_ID BIGINT REFERENCES companies(ID) NOT NULL
-        )
+        COMPANY_ID BIGINT REFERENCES companies(ID) NOT NULL,
+        CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        );
         '''
         threading.Thread(target=execute_query, args=(query,)).start()
         return True
@@ -48,7 +51,8 @@ class Auth:
         USERNAME VARCHAR(60) NOT NULL UNIQUE,
         PASSWORD  VARCHAR(256) NOT NULL,
         IS_LOGIN BOOLEAN DEFAULT FALSE,
-        )
+        CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        );
         '''
         threading.Thread(target=execute_query, args=(query,)).start()
         return True
@@ -56,10 +60,13 @@ class Auth:
     @log_decorator
     def logout(self):
         self.create_company_table()
-        self.create_employee_table()
         self.create_department_table()
-        query = 'UPDATE %s SET IS_LOGIN=FALSE;'
-        threading.Thread(target=execute_query, args=(query, 'employees',)).start()
-        threading.Thread(target=execute_query, args=(query, 'departments',)).start()
-        threading.Thread(target=execute_query, args=(query, 'companies',)).start()
+        self.create_employee_table()
+
+        tables = ['employees', 'companies']
+        for table in tables:
+            query = sql.SQL('UPDATE {} SET IS_LOGIN=FALSE;').format(
+                sql.Identifier(table)
+            )
+            threading.Thread(target=execute_query, args=(query,)).start()
         return True
