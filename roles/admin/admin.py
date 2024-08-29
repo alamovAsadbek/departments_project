@@ -51,3 +51,7 @@ class Admin:
             threading.Thread(target=execute_query, args=(query, params)).start()
             print(f"\n{company_name} company created successfully")
             return True
+
+    @log_decorator
+    def show_all_companies(self):
+        pass
