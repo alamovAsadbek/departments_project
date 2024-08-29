@@ -1,11 +1,14 @@
 import random
 import re
 
-from main_files.database.db_setting import execute_query
+from main_files.database.db_setting import execute_query, get_active
 from main_files.decorator.decorator_func import log_decorator
 
 
 class EmployeeForCompany:
+    def __init__(self):
+        self.__company = get_active('companies')
+
     @log_decorator
     def generate_username(self, name: str) -> str:
         # Strip and lower case the name
@@ -35,6 +38,10 @@ class EmployeeForCompany:
             if result is not None:
                 continue
             return username
+
+    @log_decorator
+    def get_department(self, name: str) -> int:
+        pass
 
     @log_decorator
     def create_employee(self):
