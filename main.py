@@ -136,7 +136,6 @@ def company_menu():
     try:
         # Get user input for menu choice
         user_input: int = int(input("Choose menu: "))
-
         if user_input == 1:
             # Add department management logic here
             department_menu_for_company()
