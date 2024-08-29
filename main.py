@@ -25,7 +25,7 @@ def auth_menu():
             elif result_login['role'] == 'employees':
                 pass
             elif result_login['role'] == 'companies':
-                pass
+                company_menu()
         elif user_input == 2:
             auth.logout()
             print("Logged out")

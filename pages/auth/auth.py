@@ -74,7 +74,7 @@ class Auth:
                 sql.Identifier(table)
             )
             params = (username, password)
-            result = execute_query(query, params)
+            result = execute_query(query, params, fetch='one')
             if result is not None:
                 return {'is_login': True, 'role': table}
         return {'is_login': False}
