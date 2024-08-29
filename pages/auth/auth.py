@@ -1,4 +1,3 @@
-import hashlib
 import threading
 
 from psycopg2 import sql
@@ -66,9 +65,8 @@ class Auth:
     def login(self):
         tables = ['employees', 'companies']
         username = input('Username or email: ').strip().lower()
-        password = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
-        if username == self.__admin_username and password == hashlib.sha256(
-                self.__admin_password.encode('utf-8')).hexdigest():
+        password = input("Password: ").strip()
+        if username == self.__admin_username and password == self.__admin_password:
             return {'is_login': True, 'role': 'admin'}
         print('Checked...')
         for table in tables:
