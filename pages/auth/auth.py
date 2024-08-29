@@ -62,6 +62,10 @@ class Auth:
             return False
 
     @log_decorator
+    def create_work_table(self):
+        pass
+
+    @log_decorator
     def login(self):
         tables = ['employees', 'companies']
         username = input('Username or email: ').strip().lower()
