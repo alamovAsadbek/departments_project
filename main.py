@@ -74,9 +74,9 @@ def company_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
-            pass
+            department_menu_for_company()
         elif user_input == 2:
-            pass
+            employee_menu_for_company()
         elif user_input == 3:
             pass
         elif user_input == 4:
@@ -117,7 +117,29 @@ def department_menu_for_company():
 
 @log_decorator
 def employee_menu_for_company():
-    pass
+    text = '''
+1. Create employee
+2. Update employee
+3. Delete employee
+4. Show employee
+5. Logout
+    '''
+    print(text)
+    try:
+        user_input: int = int(input("Choose menu: "))
+        if user_input == 1:
+            pass
+        elif user_input == 2:
+            pass
+        elif user_input == 3:
+            pass
+        elif user_input == 4:
+            pass
+        elif user_input == 5:
+            company_menu()
+    except Exception as e:
+        print(f'Error: {e}')
+        employee_menu_for_company()
 
 
 if __name__ == '__main__':
