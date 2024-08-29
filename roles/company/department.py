@@ -67,3 +67,7 @@ class Department:
         threading.Thread(target=execute_query, args=(query, params)).start()
         print(f'{name} has been updated')
         return True
+
+    @log_decorator
+    def delete_department(self):
+        pass
