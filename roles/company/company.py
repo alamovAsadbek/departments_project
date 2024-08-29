@@ -25,3 +25,7 @@ class Company:
     def delete_department(self):
         self.__department.delete_department()
         return True
+
+    @log_decorator
+    def create_employee(self):
+        pass
