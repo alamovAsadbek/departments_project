@@ -1,3 +1,4 @@
+import hashlib
 import threading
 
 from psycopg2 import sql
@@ -59,7 +60,10 @@ class Auth:
 
     @log_decorator
     def login(self):
-        pass
+        username = input('Username or email: ').strip().lower()
+        password = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
+        if username == 'admin' and password == hashlib.sha256(self.__admin_password.encode('utf-8')).hexdigest():
+            return {'is_login': True, 'role': 'admin'}
 
     @log_decorator
     def logout(self):
