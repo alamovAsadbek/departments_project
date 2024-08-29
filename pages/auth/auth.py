@@ -70,7 +70,7 @@ class Auth:
         if username == self.__admin_username and password == hashlib.sha256(
                 self.__admin_password.encode('utf-8')).hexdigest():
             return {'is_login': True, 'role': 'admin'}
-        print('Checkef')
+        print('Checked...')
         for table in tables:
             query = sql.SQL('SELECT * FROM {} WHERE USERNAME=%s AND PASSWORD=%s;').format(
                 sql.Identifier(table)

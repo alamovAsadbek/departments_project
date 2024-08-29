@@ -1,6 +1,6 @@
-import string
+import random
+import re
 import threading
-from random import random
 
 from main_files.database.db_setting import execute_query
 from main_files.decorator.decorator_func import log_decorator
@@ -9,15 +9,20 @@ from main_files.decorator.decorator_func import log_decorator
 class Admin:
     @log_decorator
     def generate_username(self, name: str) -> str:
+        # Strip and lower case the name
         base_name = name.strip().lower()
-        random_number = random.randint(1000, 9999)
-        random_letters = ''.join(random.choices(string.ascii_lowercase, k=2))
-        return f"{base_name}{random_number}{random_letters}"
+        # Replace spaces with underscores
+        base_name = base_name.replace(' ', '_')
+        # Remove any non-alphanumeric characters except underscores
+        base_name = re.sub(r'[^\w]', '', base_name)
+        # Generate a random number
+        random_number = random.randint(1, 9999)
+        return f"{base_name}_{random_number}"
 
     @log_decorator
-    def generate_password(self, length: int = 12) -> str:
-        characters = string.ascii_letters + string.digits + string.punctuation
-        return ''.join(random.choices(characters, k=length))
+    def generate_password(self, ) -> int:
+        random_num = random.randint(1000, 9999)
+        return random_num
 
     @log_decorator
     def create_new_company(self):
@@ -25,15 +30,20 @@ class Admin:
         while True:
             print(f"{company_name} company profile is being created")
             username = self.generate_username(company_name)
+
+            # Correct SQL Query
             query = '''
-            SELECT * FROM %s WHERE USERNAME=%s
+            SELECT * FROM companies WHERE USERNAME=%s
             '''
-            params = ('companies', username)
+            params = (username,)
             get_data = execute_query(query, params, fetch='one')
             if get_data is not None:
                 continue
-            password = self.generate_password(length=4)
+
+            password = self.generate_password()
             print(f"\nCompany name is {company_name}\nCompany username is {username}\nPassword is {password}")
+
+            # Correct SQL Query
             query = '''
             INSERT INTO companies (NAME, USERNAME, PASSWORD) VALUES (%s, %s, %s)
             '''
