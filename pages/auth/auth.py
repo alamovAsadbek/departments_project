@@ -23,7 +23,9 @@ class Auth:
         COMPANY_ID BIGINT REFERENCES companies(ID) NOT NULL,
         DEPARTMENT BIGINT REFERENCES departments(ID) NOT NULL,
         CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        IS_LOGIN BOOLEAN DEFAULT FALSE
+        IS_LOGIN BOOLEAN DEFAULT FALSE,
+        arrival_time TIME NOT NULL,
+        leave_time TIME NOT NULL,
         );
         '''
         execute_query(query)
