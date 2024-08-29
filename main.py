@@ -35,6 +35,11 @@ def auth_menu():
         auth_menu()
 
 
+@log_decorator
+def admin_menu():
+    pass
+
+
 if __name__ == '__main__':
     auth = Auth()
     auth.logout()
