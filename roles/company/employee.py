@@ -1,0 +1,2 @@
+class EmployeeForCompany:
+    pass
