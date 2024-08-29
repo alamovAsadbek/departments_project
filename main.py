@@ -90,6 +90,33 @@ def company_menu():
 
 @log_decorator
 def department_menu_for_company():
+    text = '''
+1. Create department
+2. Update department
+3. Delete department
+4. Show department
+5. Logout
+    '''
+    print(text)
+    try:
+        user_input: int = int(input("Choose menu: "))
+        if user_input == 1:
+            pass
+        elif user_input == 2:
+            pass
+        elif user_input == 3:
+            pass
+        elif user_input == 4:
+            pass
+        elif user_input == 5:
+            company_menu()
+    except Exception as e:
+        print(f'Error: {e}')
+        department_menu_for_company()
+
+
+@log_decorator
+def employee_menu_for_company():
     pass
 
 
