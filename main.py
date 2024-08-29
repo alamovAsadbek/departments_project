@@ -66,7 +66,7 @@ def admin_menu():
 def company_menu():
     text = '''
 1. Manage departments
-2. Manage employees | CRUD
+2. Manage employees
 3. Show statistics
 4. Logout
     '''
@@ -86,6 +86,11 @@ def company_menu():
     except Exception as e:
         print(f'Error: {e}')
         admin_menu()
+
+
+@log_decorator
+def department_menu_for_company():
+    pass
 
 
 if __name__ == '__main__':
