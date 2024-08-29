@@ -37,6 +37,11 @@ def auth_menu():
 
 @log_decorator
 def admin_menu():
+    pass
+
+
+@log_decorator
+def admin_menu():
     text = '''
 1. Manage departments
 2. Manage employees | CRUD
