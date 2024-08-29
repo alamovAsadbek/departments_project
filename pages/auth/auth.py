@@ -58,6 +58,10 @@ class Auth:
         return True
 
     @log_decorator
+    def login(self):
+        pass
+
+    @log_decorator
     def logout(self):
         self.create_company_table()
         self.create_department_table()
