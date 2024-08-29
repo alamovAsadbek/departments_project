@@ -69,8 +69,8 @@ class Auth:
                     ID BIGSERIAL PRIMARY KEY,
                     EMPLOYEE_ID BIGINT REFERENCES employees(ID) NOT NULL,
                     TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    TIME BIGINT NOT NULL,
-                    STATUS VARCHAR(60) NOT NULL,
+                    LATE_TIME BIGINT NOT NULL,
+                    STATUS VARCHAR(60) NOT NULL
                     );
                     '''
             execute_query(query)
