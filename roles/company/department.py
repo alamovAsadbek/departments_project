@@ -38,4 +38,10 @@ class Department:
             print("Data is not found")
             return False
         for department in result_get:
-            print(f"ID: {department['id']}")
+            print(f'<- \t{count} \t->\n')
+            print(f"ID: {department['id']}\nName: {department['name']}\nCreated: {department['created_at']}\n")
+            count += 1
+        if count == 1:
+            print("Department has been found")
+            return False
+        return True

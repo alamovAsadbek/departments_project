@@ -70,4 +70,7 @@ class Admin:
         else:
             print("Company list is empty")
             return False
+        if count == 1:
+            print("Company list is empty")
+            return False
         return True
