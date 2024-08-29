@@ -23,6 +23,10 @@ class EmployeeForCompany:
         return random_num
 
     @log_decorator
+    def get_username(self, name: str) -> str:
+        pass
+
+    @log_decorator
     def create_employee(self):
         first_name: str = input("First Name: ").strip()
         last_name: str = input("Last Name: ").strip()
