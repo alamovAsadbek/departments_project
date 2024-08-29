@@ -18,7 +18,8 @@ class Company:
 
     @log_decorator
     def update_department(self):
-        pass
+        self.__department.update_department()
+        return True
 
     @log_decorator
     def delete_department(self):
