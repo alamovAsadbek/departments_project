@@ -12,7 +12,16 @@ def auth_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
-            pass
+            result_login = auth.login()
+            if not result_login['is_login']:
+                print('Login failed')
+                auth_menu()
+            elif result_login['role'] == 'admin':
+                pass
+            elif result_login['role'] == 'employees':
+                pass
+            elif result_login['role'] == 'companies':
+                pass
         elif user_input == 2:
             auth.logout()
             print("Logged out")
