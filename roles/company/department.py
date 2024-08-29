@@ -23,11 +23,19 @@ class Department:
     @log_decorator
     def get_department(self):
         query = '''
-                SELECT * FROM departments WHERE COMPANY_ID=%s
+                SELECT * FROM departments WHERE COMPANY_ID=%s;
         '''
         params = (self.__active_company['id'],)
-        execute_query(query, params, fetch='all')
+        print(self.__active_company, self.__active_company['id'])
+        return execute_query(query, params, fetch='all')
 
     @log_decorator
     def show_department(self):
-        print(self.get_department())
+        print('Waiting...')
+        count = 1
+        result_get = self.get_department()
+        if result_get is None:
+            print("Data is not found")
+            return False
+        for department in result_get:
+            print(f"ID: {department['id']}")

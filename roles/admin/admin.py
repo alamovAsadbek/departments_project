@@ -67,4 +67,7 @@ class Admin:
                       f'Company username: {company["username"]}\nCompany password: {company["password"]}\n'
                       f'Created: {company["created_at"]}\n')
                 count += 1
+        else:
+            print("Company list is empty")
+            return False
         return True

@@ -28,8 +28,8 @@ def auth_menu():
             elif result_login['role'] == 'companies':
                 company_menu()
         elif user_input == 2:
-            auth.logout()
-            print("Logged out")
+            threading.Thread(target=auth.logout).start()
+            print("\nLogged out")
             return
         else:
             print("Wrong input")
