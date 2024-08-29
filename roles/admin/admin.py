@@ -54,4 +54,17 @@ class Admin:
 
     @log_decorator
     def show_all_companies(self):
-        pass
+        print('Waiting...')
+        count = 1
+        query = '''
+        SELECT * FROM companies
+        '''
+        get_data = execute_query(query, fetch='all')
+        if get_data is not None:
+            for company in get_data:
+                print(f'\n<- {count} ->\n')
+                print(f'ID: {company["id"]}\nCompany name: {company["name"]}\n'
+                      f'Company username: {company["username"]}\nCompany password: {company["password"]}\n'
+                      f'Created: {company["created_at"]}\n')
+                count += 1
+        return True

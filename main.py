@@ -53,7 +53,8 @@ def admin_menu():
             admin.create_new_company()
             admin_menu()
         elif admin_input == 2:
-            pass
+            admin.show_all_companies()
+            admin_menu()
         elif admin_input == 3:
             auth_menu()
     except Exception as e:
