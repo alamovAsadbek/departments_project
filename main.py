@@ -1,5 +1,6 @@
 from main_files.decorator.decorator_func import log_decorator
 from pages.auth.auth import Auth
+from roles.admin.admin import Admin
 
 
 @log_decorator
@@ -18,7 +19,7 @@ def auth_menu():
                 auth_menu()
             elif result_login['role'] == 'admin':
                 print("\n<- Welcome Admin ->\n")
-                pass
+                admin_menu()
             elif result_login['role'] == 'employees':
                 pass
             elif result_login['role'] == 'companies':
@@ -37,7 +38,25 @@ def auth_menu():
 
 @log_decorator
 def admin_menu():
-    pass
+    text = '''
+1. Create company
+2. Show all companies
+3. Logout
+    '''
+    print(text)
+    try:
+        admin = Admin()
+        admin_input: int = int(input("Choose menu: "))
+        if admin_input == 1:
+            admin.create_new_company()
+            admin_menu()
+        elif admin_input == 2:
+            pass
+        elif admin_input == 3:
+            auth_menu()
+    except Exception as e:
+        print(f'Error: {e}')
+        admin_menu()
 
 
 @log_decorator

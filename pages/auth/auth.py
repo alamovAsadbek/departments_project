@@ -67,14 +67,16 @@ class Auth:
         tables = ['employees', 'companies']
         username = input('Username or email: ').strip().lower()
         password = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
-        if username == 'admin' and password == hashlib.sha256(self.__admin_password.encode('utf-8')).hexdigest():
+        if username == self.__admin_username and password == hashlib.sha256(
+                self.__admin_password.encode('utf-8')).hexdigest():
             return {'is_login': True, 'role': 'admin'}
+        print('Checkef')
         for table in tables:
-            query = '''
-            SELECT * FROM %s WHERE USERNAME=%s AND PASSWORD=%s;
-            '''
-            params = (table, username, password)
-            result = execute_query(query, params, fetch='one')
+            query = sql.SQL('SELECT * FROM {} WHERE USERNAME=%s AND PASSWORD=%s;').format(
+                sql.Identifier(table)
+            )
+            params = (username, password)
+            result = execute_query(query, params)
             if result is not None:
                 return {'is_login': True, 'role': table}
         return {'is_login': False}
