@@ -1,10 +1,12 @@
 from main_files.decorator.decorator_func import log_decorator
 from roles.company.department import Department
+from roles.company.employee import EmployeeForCompany
 
 
 class Company:
     def __init__(self):
         self.__department = Department()
+        self.__employee = EmployeeForCompany()
 
     @log_decorator
     def create_department(self):
@@ -28,4 +30,5 @@ class Company:
 
     @log_decorator
     def create_employee(self):
-        pass
+        self.__employee.create_employee()
+        return True

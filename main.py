@@ -129,9 +129,10 @@ def employee_menu_for_company():
     '''
     print(text)
     try:
+        company = Company()
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
-            pass
+            company.create_employee()
         elif user_input == 2:
             pass
         elif user_input == 3:
@@ -139,7 +140,8 @@ def employee_menu_for_company():
         elif user_input == 4:
             pass
         elif user_input == 5:
-            company_menu()
+            return company_menu()
+        employee_menu_for_company()
     except Exception as e:
         print(f'Error: {e}')
         employee_menu_for_company()

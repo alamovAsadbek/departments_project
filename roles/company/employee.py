@@ -34,7 +34,7 @@ class EmployeeForCompany:
         while True:
             username = self.generate_username(name)
             query = '''
-            SELECT * FROM employees WHERE username=?s
+            SELECT * FROM employees WHERE username=?s;
             '''
             params = (username,)
             result = execute_query(query, params)
@@ -76,7 +76,7 @@ class EmployeeForCompany:
         '''
         params = (first_name, last_name, username, password, self.__company['id'], result_department['id'],
                   arrival_time, leave_time)
-
         threading.Thread(target=execute_query, args=(query, params,)).start()
+        print(f'\nEmployee username: {username}\nEmployee password: {password}\n')
         print("Employee created")
         return True
