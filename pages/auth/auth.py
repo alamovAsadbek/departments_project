@@ -63,7 +63,21 @@ class Auth:
 
     @log_decorator
     def create_work_table(self):
-        pass
+        try:
+            query = '''
+                    CREATE TABLE IF NOT EXISTS working_time (
+                    ID BIGSERIAL PRIMARY KEY,
+                    EMPLOYEE_ID BIGINT REFERENCES employees(ID) NOT NULL,
+                    TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    TIME BIGINT NOT NULL,
+                    STATUS VARCHAR(60) NOT NULL,
+                    );
+                    '''
+            execute_query(query)
+            return True
+        except Exception as e:
+            print(f'Error: {e}')
+            return False
 
     @log_decorator
     def login(self):
@@ -94,6 +108,7 @@ class Auth:
         self.create_company_table()
         self.create_department_table()
         self.create_employee_table()
+        self.create_work_table()
         tables = ['employees', 'companies']
         for table in tables:
             query = sql.SQL('UPDATE {} SET IS_LOGIN=FALSE;').format(
