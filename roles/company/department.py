@@ -47,4 +47,23 @@ class Department:
 
     @log_decorator
     def update_department(self):
-        pass
+        if not self.show_department():
+            return False
+        department_id = int(input("Enter Department ID: ").strip())
+        print("Waiting...")
+        query = '''
+        SELECT * FROM departments WHERE COMPANY_ID=%s and ID=%s;
+        '''
+        params = (self.__active_company['id'], department_id)
+        get_department = execute_query(query, params, fetch='one')
+        if get_department is None:
+            print("Data is not found")
+            return False
+        name = input("Enter Department New Name: ").strip()
+        query = '''
+        UPDATE departments SET NAME=%s WHERE ID=%s;
+        '''
+        params = (name, department_id)
+        threading.Thread(target=execute_query, args=(query, params)).start()
+        print(f'{name} has been updated')
+        return True
