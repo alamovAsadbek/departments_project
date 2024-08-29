@@ -26,7 +26,6 @@ class Department:
                 SELECT * FROM departments WHERE COMPANY_ID=%s;
         '''
         params = (self.__active_company['id'],)
-        print(self.__active_company, self.__active_company['id'])
         return execute_query(query, params, fetch='all')
 
     @log_decorator
@@ -45,3 +44,7 @@ class Department:
             print("Department has been found")
             return False
         return True
+
+    @log_decorator
+    def update_department(self):
+        pass
