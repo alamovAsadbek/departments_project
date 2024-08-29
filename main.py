@@ -104,15 +104,15 @@ def department_menu_for_company():
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
             company.create_department()
-            department_menu_for_company()
         elif user_input == 2:
-            pass
+            company.update_department()
         elif user_input == 3:
-            pass
+            company.delete_department()
         elif user_input == 4:
-            pass
+            company.show_department()
         elif user_input == 5:
-            company_menu()
+            return company_menu()
+        department_menu_for_company()
     except Exception as e:
         print(f'Error: {e}')
         department_menu_for_company()

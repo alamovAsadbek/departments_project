@@ -10,3 +10,16 @@ class Company:
     def create_department(self):
         self.__department.create_department()
         return True
+
+    @log_decorator
+    def show_department(self):
+        self.__department.show_department()
+        return True
+
+    @log_decorator
+    def update_department(self):
+        pass
+
+    @log_decorator
+    def delete_department(self):
+        pass
