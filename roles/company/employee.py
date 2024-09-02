@@ -63,7 +63,7 @@ class EmployeeForCompany:
         last_name: str = input("Last Name: ").strip()
         arrival_time = input("Enter arrival time (12:00): ").strip()
         leave_time = input("Enter arrival time (12:00): ").strip()
-        print("\n Choose department: \n")
+        print("\nChoose department: \n")
         result_department = self.get_department()
         if not result_department:
             print('Something is wrong')
